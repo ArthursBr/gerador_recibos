@@ -1,5 +1,5 @@
 # Gerador de Recibos Simples
-## Sistema web para geração de recibos de pagamento com layout profissional
+## Sistema web para geração de recibos de pagamento
 
 ## Funcionalidades
 - Geração de recibos 
