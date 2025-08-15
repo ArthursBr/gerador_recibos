@@ -12,5 +12,5 @@
 
 ## Tecnologias Utilizadas
 - HTML5
-- CSS3 (Flexbox e Grid)
-- JavaScript (Vanilla)
+- CSS3 
+- JavaScript 
