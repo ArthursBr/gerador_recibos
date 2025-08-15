@@ -2,13 +2,13 @@
 ## Sistema web para geração de recibos de pagamento com layout profissional
 
 ## Funcionalidades
-- Geração de recibos profissionais
+- Geração de recibos 
 - Conversão automática de valores para extenso
 - Opção de uma ou duas vias
 - Formatação automática de CPF/CNPJ e telefone
-- Suporte a múltiplas formas de pagamento
+- Múltiplas formas de pagamento
 - Design responsivo (desktop, tablet e celular)
-- Impressão otimizada
+- Impressão
 
 ## Tecnologias Utilizadas
 - HTML5
