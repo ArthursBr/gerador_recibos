@@ -91,7 +91,7 @@ function gerarRecibo() {
 
     // Conteúdo do recibo
     let reciboContent = `
-        <p>Recebi(emos) de <strong>${pagador}</strong>${cpfCnpjPagador ? `, portador(a) do CPF/CNPJ <strong>${cpfCnpjPagador}</strong>` : ''}, a importância de <strong>${valorExtenso}</strong>, referente ${referente} <strong>${referenciaTexto}</strong>.</p>
+        <p>Recebi(emos) de <strong>${pagador}</strong>${cpfCnpjPagador ? `, portador(a) do CPF/CNPJ <strong>${cpfCnpjPagador}</strong>` : ''}, pelo valor de <strong>${valorExtenso}</strong>, referente ${referente} <strong>${referenciaTexto}</strong>.</p>
         
         <p>Para maior clareza, firmo(amos) o presente recibo, que comprova o recebimento integral do valor mencionado, concedendo <strong>quitação plena, geral e irrevogável</strong> pela quantia recebida.</p>
     `;
