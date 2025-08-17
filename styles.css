@@ -172,7 +172,6 @@ button {
     box-shadow: 0 4px 8px rgba(66, 133, 244, 0.3);
 }
 
-/* Estilo do recibo */
 .recibo {
     display: none;
     max-width: 700px;
@@ -283,14 +282,27 @@ button {
         top: 0;
         width: 100% !important;
         margin: 0 !important;
+        padding: 0 !important;
     }
     .recibo-item {
-        margin-bottom: 30px !important;
+        margin-bottom: 20px !important;
         border: 3px solid #333 !important;
         page-break-inside: avoid;
+        page-break-after: avoid;
+    }
+    .recibo-item:last-of-type {
+        margin-bottom: 0 !important;
     }
     .btn-imprimir {
         display: none !important;
+    }
+    body {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    @page {
+        margin: 15mm;
+        size: A4;
     }
 }
 
