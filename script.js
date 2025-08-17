@@ -1,4 +1,6 @@
-document.getElementById('dataPagamento').valueAsDate = new Date();
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('dataPagamento').valueAsDate = new Date();
+});
 
 function numeroParaTexto(numero) {
     const unidades = ['', 'um', 'dois', 'três', 'quatro', 'cinco', 'seis', 'sete', 'oito', 'nove'];
@@ -88,16 +90,17 @@ function gerarRecibo() {
         <p>Recebi(emos) de <strong>${pagador}</strong>${cpfCnpjPagador ? `, portador(a) do CPF/CNPJ <strong>${cpfCnpjPagador}</strong>` : ''}, pelo valor de <strong>${valorExtenso}</strong>, referente ${referente} <strong>${referenciaTexto}</strong>.</p>
         
         <p>Para maior clareza, firmo(amos) o presente recibo, que comprova o recebimento integral do valor mencionado, concedendo <strong>quitação plena, geral e irrevogável</strong> pela quantia recebida.</p>
+        
+        <p><strong>Forma de pagamento:</strong> ${formaPagamento}</p>
     `;
-
-    if (formaPagamento !== 'Dinheiro') {
-        reciboContent += `<p><strong>Forma de pagamento:</strong> ${formaPagamento}</p>`;
-    }
 
     function criarReciboItem(viaNumero = null) {
         return `
             <div class="recibo-item">
-                ${viaNumero ? `<div class="via-label">${viaNumero} Via</div>` : ''}
+                <div class="info-superior-esquerda">
+                    ${viaNumero ? `<div class="via-label">${viaNumero} Via</div>` : ''}
+                    ${telefone ? `<div class="telefone-superior">${telefone}</div>` : ''}
+                </div>
                 <div class="valor-box">${valorFormatado}</div>
                 <h2>Recibo de Pagamento</h2>
                 <div class="recibo-content">${reciboContent}</div>
@@ -105,7 +108,6 @@ function gerarRecibo() {
                 <div class="assinatura">
                     <div class="linha-assinatura"></div>
                     <div class="nome-assinatura">${nomeEmissor}${cpfCnpjEmissor ? ` - ${cpfCnpjEmissor}` : ''}</div>
-                    <div class="telefone-assinatura">${telefone || ''}</div>
                 </div>
             </div>
         `;
@@ -133,7 +135,124 @@ function limparFormulario() {
 }
 
 function imprimirRecibo() {
-    window.print();
+    const reciboContent = document.getElementById('recibo').innerHTML;
+    const printWindow = window.open('', '_blank');
+    
+    printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Recibo de Pagamento</title>
+            <style>
+                * {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                }
+                body {
+                    font-family: Arial, sans-serif;
+                    padding: 20px;
+                    background: white;
+                }
+                .recibo-item {
+                    background: white;
+                    border: 3px solid #333;
+                    border-radius: 15px;
+                    padding: 40px;
+                    position: relative;
+                    margin-bottom: 20px;
+                    page-break-inside: avoid;
+                }
+                .recibo-item:last-of-type {
+                    margin-bottom: 0;
+                }
+                h2 {
+                    text-align: center;
+                    font-size: 20px;
+                    font-weight: bold;
+                    margin-bottom: 30px;
+                    color: #333;
+                }
+                .valor-box {
+                    position: absolute;
+                    top: 20px;
+                    right: 30px;
+                    border: 2px solid #333;
+                    border-radius: 8px;
+                    padding: 8px 12px;
+                    font-weight: bold;
+                    font-size: 14px;
+                }
+                .info-superior-esquerda {
+                    position: absolute;
+                    top: 20px;
+                    left: 30px;
+                    font-size: 12px;
+                    color: #333;
+                }
+                .via-label {
+                    font-weight: bold;
+                    color: #666;
+                    margin-bottom: 5px;
+                }
+                .nome-superior {
+                    font-weight: bold;
+                    font-size: 13px;
+                    margin-bottom: 2px;
+                }
+                .telefone-superior {
+                    font-size: 11px;
+                    color: #666;
+                }
+                .recibo-content {
+                    font-size: 14px;
+                    line-height: 1.6;
+                    text-align: justify;
+                    margin-bottom: 40px;
+                }
+                .recibo-content p {
+                    margin-bottom: 15px;
+                }
+                .data-local {
+                    text-align: right;
+                    margin: 30px 0;
+                    font-size: 14px;
+                }
+                .assinatura {
+                    margin-top: 50px;
+                    text-align: center;
+                }
+                .linha-assinatura {
+                    border-bottom: 2px solid #333;
+                    width: 300px;
+                    margin: 30px auto 10px;
+                }
+                .nome-assinatura {
+                    font-size: 14px;
+                    margin-top: 5px;
+                }
+                @page {
+                    margin: 15mm;
+                    size: A4;
+                }
+                @media print {
+                    body {
+                        padding: 0;
+                    }
+                }
+            </style>
+        </head>
+        <body>
+            ${reciboContent.replace(/<div style="text-align: center; margin-top: 30px;">[\s\S]*?<\/div>/, '')}
+        </body>
+        </html>
+    `);
+    
+    printWindow.document.close();
+    printWindow.focus();
+    printWindow.print();
+    printWindow.close();
 }
 
 document.getElementById('reciboForm').addEventListener('submit', function(e) {

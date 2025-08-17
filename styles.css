@@ -200,6 +200,31 @@ button {
     color: #333;
 }
 
+.info-superior-esquerda {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    font-size: 12px;
+    color: #333;
+}
+
+.via-label {
+    font-weight: bold;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.nome-superior {
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 2px;
+}
+
+.telefone-superior {
+    font-size: 11px;
+    color: #666;
+}
+
 .valor-box {
     position: absolute;
     top: 20px;
@@ -209,15 +234,6 @@ button {
     padding: 8px 12px;
     font-weight: bold;
     font-size: 14px;
-}
-
-.via-label {
-    position: absolute;
-    top: 20px;
-    right: 120px;
-    font-size: 12px;
-    color: #666;
-    font-weight: bold;
 }
 
 .recibo-content {
@@ -251,12 +267,6 @@ button {
 .nome-assinatura {
     font-size: 14px;
     margin-top: 5px;
-}
-
-.telefone-assinatura {
-    font-size: 12px;
-    color: #666;
-    margin-top: 3px;
 }
 
 .btn-imprimir {
